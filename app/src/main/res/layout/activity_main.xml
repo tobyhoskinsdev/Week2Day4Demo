@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <!-- Make, Model, Year, Color, TitleStatus User Input -->
+    <TextView
+        android:id="@+id/tvCarMake"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:textColor="#F44336"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvCarModel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:textColor="#F44336"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvCarYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:textColor="#F44336"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvCarColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:textColor="#F44336"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvCarTitleStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:textColor="#F44336"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnStartForResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="START DATA ENTRY ACTIVITY FOR RESULT"
+        android:onClick="onClick"/>
+
+</LinearLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DataEntryActivity">
+
+    <!-- Make, Model, Year, Color, TitleStatus User Input -->
+    <EditText
+        android:id="@+id/etCarMake"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:textColor="#F44336"
+        android:textStyle="bold"
+        android:hint="Car Make"/>
+
+    <EditText
+        android:id="@+id/etCarModel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:textColor="#F44336"
+        android:textStyle="bold"
+        android:hint="Car Model"/>
+
+    <EditText
+        android:id="@+id/etCarYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:textSize="28sp"
+        android:textColor="#F44336"
+        android:textStyle="bold"
+        android:hint="Year"/>
+
+    <EditText
+        android:id="@+id/etCarColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:textColor="#F44336"
+        android:textStyle="bold"
+        android:hint="Color"/>
+
+    <EditText
+        android:id="@+id/etCarTitleStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:textColor="#F44336"
+        android:textStyle="bold"
+        android:hint="Title Status"/>
+
+    <Button
+        android:id="@+id/btnSendResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SEND RESULT"
+        android:onClick="onClick"/>
+
+</LinearLayout>
