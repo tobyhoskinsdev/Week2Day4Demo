@@ -11,15 +11,23 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
     //Constants
     public static final int REQUEST_CODE_FOR_MAIN = 427;
+    static final int READ_BLOCK_SIZE = 100;
     public static final String KEY_SHARED_PREF = "shared_pref";
     public static final String KEY_LAST_ENTERED_MAKE = "last_make";
     public static final String KEY_LAST_ENTERED_MODEL = "last_model";
+    public static final String DATA_ENTRY_ACTION = "data.enty.activity";
+    public static final String MY_FILE_TXT = "mytextfile.txt";
 
     //Declare views
     TextView tvCarMakeDisplay;
@@ -79,8 +87,8 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.btnStartForResult:
-                Intent explicitIntent = new Intent(this, DataEntryActivity.class);
-                startActivityForResult(explicitIntent, REQUEST_CODE_FOR_MAIN);
+                Intent implicitIntent = new Intent(DATA_ENTRY_ACTION);
+                startActivityForResult(implicitIntent, REQUEST_CODE_FOR_MAIN);
                 break;
             case R.id.btnUpdateEntry:
                 if(etIdNumber.getText() != null && etColor.getText() != null) {
@@ -111,6 +119,15 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("TAG", currentCar.toString());
                     }
                 }
+                break;
+            case R.id.btnReadFromFile:
+                //Read from file
+                readFromFile();
+                break;
+
+                case R.id.btnWriteToFile:
+                //Write to file
+                writeToFile();
                 break;
 
         }
@@ -186,5 +203,56 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+    //Write to INTERNAL storage
+    public void writeToFile() {
+        try {
+
+            //Open up file to edit
+            FileOutputStream fileOutputStream= openFileOutput(MY_FILE_TXT, MODE_PRIVATE);
+            //Add to the file the text we want to save
+            fileOutputStream.write("SOME TEXT I AM SAVING".getBytes());
+            //close the file
+            Log.d("TAG", "writeToFile: " +fileOutputStream);
+            fileOutputStream.close();
+            Log.d("TAG", "writeToFile: TEXT WRITTEN TO FILE");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Read from INTERNAL storage
+    public void readFromFile() {
+        //Open file to read
+        try {
+
+            //Open file to read
+            FileInputStream fileInputStream = openFileInput(MY_FILE_TXT);
+            //Assign reader to file stream
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+
+            char[] readBuffer = new char[READ_BLOCK_SIZE]; //blockes to read at a time
+            String stringReadFromFile = ""; //hold all the text read from file
+            int currentRead; //current value being read
+
+            // while the current item being read is greater that a valueof 0, read the next value
+            while((currentRead = inputStreamReader.read(readBuffer)) > 0) {
+                //Convert the read value to a char(String)
+                String readstring=String.copyValueOf(readBuffer,0,currentRead);
+                //add char to read string
+                stringReadFromFile+= readstring;
+                Log.d("TAG", "readFromFile: " + stringReadFromFile);
+            }
+            fileInputStream.close();
+
+            //Display results in logcat
+            Log.d("TAG", "readFromFile: " + stringReadFromFile);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

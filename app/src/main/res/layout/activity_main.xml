@@ -82,4 +82,18 @@
         android:text="DELETE ENTRY"
         android:onClick="onClick"/>
 
+    <Button
+        android:id="@+id/btnWriteToFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="WRITE TO FILE"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/btnReadFromFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Read From FILE"
+        android:onClick="onClick"/>
+
 </LinearLayout>
