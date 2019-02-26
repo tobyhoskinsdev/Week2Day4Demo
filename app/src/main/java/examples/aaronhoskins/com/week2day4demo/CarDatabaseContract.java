@@ -2,6 +2,8 @@ package examples.aaronhoskins.com.week2day4demo;
 
 import android.util.Log;
 
+import java.util.Locale;
+
 public class CarDatabaseContract {
     //Database name and default version
     public static final String DATABASE_NAME = "car_db";
@@ -28,7 +30,7 @@ public class CarDatabaseContract {
         //Must have unique primary key
         queryBuilder.append(COLUMN_ID);
         queryBuilder.append(" ");
-        queryBuilder.append(" INT NONNULL IDENTITY PRIMARY KEY, ");
+        queryBuilder.append(" INTEGER PRIMARY KEY AUTOINCREMENT, ");
         //Add rest of the columns
         queryBuilder.append(COLUMN_MAKE);
         queryBuilder.append(" TEXT, ");
@@ -53,6 +55,10 @@ public class CarDatabaseContract {
 
     public static String getOneCarById(int id) {
         return String.format("SELECT * FROM %s WHERE %s = \"%d\"", TABLE_NAME, COLUMN_ID, id);
+    }
+
+    public static String getWhereClauseById() {
+        return String.format(Locale.US, "%s = ", COLUMN_ID);
     }
 
 }

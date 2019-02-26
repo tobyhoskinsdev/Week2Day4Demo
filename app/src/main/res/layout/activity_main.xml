@@ -56,4 +56,30 @@
         android:text="START DATA ENTRY ACTIVITY FOR RESULT"
         android:onClick="onClick"/>
 
+    <EditText
+        android:id="@+id/etIdNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ID NUMBER"/>
+
+    <EditText
+        android:id="@+id/etColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="COLOR"/>
+
+    <Button
+        android:id="@+id/btnUpdateEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UPDATE ENTRY"
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/btnDeleteEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DELETE ENTRY"
+        android:onClick="onClick"/>
+
 </LinearLayout>

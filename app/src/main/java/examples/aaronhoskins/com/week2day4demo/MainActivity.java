@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     TextView tvCarYearDisplay;
     TextView tvCarColorDisplay;
     TextView tvCarTitleStatusDisplay;
+    EditText etIdNumber;
+    EditText etColor;
     //Shared Preferences Object
     SharedPreferences sharedPreferences;
     //Car Database Declaration
@@ -51,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         tvCarModelDisplay = findViewById(R.id.tvCarModel);
         tvCarYearDisplay = findViewById(R.id.tvCarYear);
         tvCarTitleStatusDisplay = findViewById(R.id.tvCarTitleStatus);
+        etIdNumber = findViewById(R.id.etIdNumber);
+        etColor = findViewById(R.id.etColor);
     }
 
     //
@@ -76,6 +81,36 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btnStartForResult:
                 Intent explicitIntent = new Intent(this, DataEntryActivity.class);
                 startActivityForResult(explicitIntent, REQUEST_CODE_FOR_MAIN);
+                break;
+            case R.id.btnUpdateEntry:
+                if(etIdNumber.getText() != null && etColor.getText() != null) {
+                    //Get our database helper
+                    CarDatabaseHelper carDatabaseHelper = new CarDatabaseHelper(this);
+                    //Retrive the car which has the same id as the one which we want to edit
+                    int carId = Integer.parseInt(etIdNumber.getText().toString());
+                    Car carToedit = carDatabaseHelper.getCarById(carId);
+                    //set the color to the new value for the car we want to edit
+                    carToedit.setCarColor(etColor.getText().toString());
+                    //update the database with the new value(s)
+                    carDatabaseHelper.updateCarInDatabase(carToedit);
+                }
+                break;
+            case R.id.btnDeleteEntry:
+                if(etIdNumber.getText() != null) {
+                    //Get Database Helper
+                    CarDatabaseHelper carDBHelper = new CarDatabaseHelper(this);
+                    //Get Id
+                    String carIdToDelete = etIdNumber.getText().toString();
+                    //Delete item with id from Database
+                    String[] idsToDelete = new String[]{carIdToDelete};
+                    Log.d("TAG", "onClick: DELETING " + carIdToDelete);
+                    carDBHelper.deleteFromDatabaseById(idsToDelete);
+
+                    ArrayList<Car> carList = carDBHelper.getAllCarsFromDatabase();
+                    for(Car currentCar : carList) {
+                        Log.d("TAG", currentCar.toString());
+                    }
+                }
                 break;
 
         }

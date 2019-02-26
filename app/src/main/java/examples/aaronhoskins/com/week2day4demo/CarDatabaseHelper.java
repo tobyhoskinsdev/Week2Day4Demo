@@ -9,9 +9,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import static examples.aaronhoskins.com.week2day4demo.CarDatabaseContract.COLUMN_COLOR;
 import static examples.aaronhoskins.com.week2day4demo.CarDatabaseContract.COLUMN_ID;
+
 import static examples.aaronhoskins.com.week2day4demo.CarDatabaseContract.COLUMN_MAKE;
 import static examples.aaronhoskins.com.week2day4demo.CarDatabaseContract.COLUMN_MODEL;
 import static examples.aaronhoskins.com.week2day4demo.CarDatabaseContract.COLUMN_TITLE;
@@ -19,6 +21,7 @@ import static examples.aaronhoskins.com.week2day4demo.CarDatabaseContract.COLUMN
 import static examples.aaronhoskins.com.week2day4demo.CarDatabaseContract.DATABASE_NAME;
 import static examples.aaronhoskins.com.week2day4demo.CarDatabaseContract.DATABASE_VERSION;
 import static examples.aaronhoskins.com.week2day4demo.CarDatabaseContract.TABLE_NAME;
+import static examples.aaronhoskins.com.week2day4demo.CarDatabaseContract.getWhereClauseById;
 
 
 public class CarDatabaseHelper extends SQLiteOpenHelper {
@@ -102,6 +105,35 @@ public class CarDatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return returnCar;
     }
+
+    //update an item in the database
+    public long updateCarInDatabase(@NonNull Car newCarInfo) {
+        SQLiteDatabase writeableDatabase = this.getWritableDatabase();
+        //Data container used for database key value pairs
+        ContentValues contentValues = new ContentValues();
+
+        //inset key value pairs into the contentValues container
+        contentValues.put(COLUMN_MAKE, newCarInfo.getCarMake());
+        contentValues.put(COLUMN_MODEL, newCarInfo.getCarModel());
+        contentValues.put(COLUMN_YEAR, newCarInfo.getCarYear());
+        contentValues.put(COLUMN_COLOR, newCarInfo.getCarColor());
+        contentValues.put(COLUMN_TITLE, newCarInfo.getCarTitleStatus());
+
+        return writeableDatabase.update(TABLE_NAME,
+                contentValues,
+                getWhereClauseById(),
+                new String[]{String.valueOf(newCarInfo.getCarId())});
+    }
+
+    //delete entry(ies) from the database
+    public long deleteFromDatabaseById(String[] id) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return sqLiteDatabase.delete(TABLE_NAME, getWhereClauseById() + id[0], null);
+
+    }
+
+
+
 
 }
 
